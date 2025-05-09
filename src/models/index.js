@@ -11,6 +11,7 @@ import Paquete from "./Paquete.js";
 Camionero.hasMany(CamioneroXCamion, {
     foreignKey: "camioneroId",
     sourceKey: "id",
+    onDelete: "CASCADE" // Eliminación en cascada
 });
 CamioneroXCamion.belongsTo(Camionero, {
     foreignKey: "camioneroId",
@@ -21,6 +22,7 @@ CamioneroXCamion.belongsTo(Camionero, {
 Camion.hasMany(CamioneroXCamion, {
     foreignKey: "camionId",
     sourceKey: "id",
+    onDelete: "CASCADE"  // Eliminación en cascada
 });
 CamioneroXCamion.belongsTo(Camion, {
     foreignKey: "camionId",
@@ -48,4 +50,4 @@ Paquete.belongsTo(Provincia, {
 });
 
 
-export { sequelize, Camionero, Camion, CamioneroXCamion, Provincia, Paquete }
+export { sequelize }

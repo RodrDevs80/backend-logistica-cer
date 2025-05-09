@@ -14,6 +14,10 @@ const Paquete = sequelize.define("Paquete", {
         allowNull: false,
         unique: true
     },
+    descripcion: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     direccion: {
         type: DataTypes.STRING,
         allowNull: false,
