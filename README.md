@@ -4,14 +4,20 @@ Este proyecto es un backend para un sistema de gestión logística que maneja ca
 
 ## Características principales
 
-- Gestión de camioneros (CRUD completo)
+- Gestión completa de entidades (CRUD):
+  - Camioneros
+  - Camiones
+  - Paquetes
+  - Provincias
+  - Relaciones CamioneroXCamion
 - Modelado de relaciones entre entidades:
-  - Camioneros y camiones (relación muchos-a-muchos)
+  - Camioneros y camiones (relación muchos-a-muchos a través de CamioneroXCamion)
   - Camioneros y paquetes (relación uno-a-muchos)
   - Provincias y paquetes (relación uno-a-muchos)
 - API RESTful con Express
 - Conexión a base de datos MySQL mediante Sequelize
 - Middlewares para CORS, logging (morgan) y manejo de JSON
+- Validación de datos y manejo de errores
 
 ## Estructura del proyecto
 
@@ -20,6 +26,12 @@ proyecto_backend_002_logist/
 ├── index.js                 # Punto de entrada de la aplicación
 ├── package.json
 ├── src/
+│   ├── controllers/         # Controladores para cada entidad
+│   │   ├── camionController.js
+│   │   ├── camioneroController.js
+│   │   ├── camioneroXCamionController.js
+│   │   ├── paqueteController.js
+│   │   └── provinciaController.js
 │   ├── db/
 │   │   └── connection.js    # Configuración de conexión a la base de datos
 │   ├── models/              # Modelos de Sequelize
@@ -29,8 +41,12 @@ proyecto_backend_002_logist/
 │   │   ├── index.js         # Exportación de modelos y definición de relaciones
 │   │   ├── Paquete.js
 │   │   └── Provincia.js
-│   └── routes/
-│       └── camioneroRoutes.js # Rutas para el recurso Camionero
+│   └── routes/              # Rutas para cada recurso
+│       ├── camioneroRoutes.js
+│       ├── camionRoutes.js
+│       ├── camioneroXCamion.js
+│       ├── paquetesRoutes.js
+│       └── provinciaRoutes.js
 ```
 
 ## Modelos de datos
@@ -58,6 +74,7 @@ proyecto_backend_002_logist/
 4. **Paquete**
 
    - código (string, único)
+   - descripción (string)
    - dirección (string)
    - destinatario (string)
    - domicilioDestinatario (string)
@@ -76,6 +93,38 @@ proyecto_backend_002_logist/
 - `POST /camioneros` - Crear un nuevo camionero
 - `PUT /camioneros/:id` - Actualizar un camionero existente
 - `DELETE /camioneros/:id` - Eliminar un camionero
+
+### Camiones
+
+- `GET /camiones` - Obtener todos los camiones
+- `GET /camion-by-id/:id` - Obtener un camión por ID
+- `POST /camiones` - Crear un nuevo camión
+- `PUT /camiones/:id` - Actualizar un camión existente
+- `DELETE /camiones/:id` - Eliminar un camión
+
+### Provincias
+
+- `GET /provincias` - Obtener todas las provincias
+- `GET /provincia-by-id/:id` - Obtener una provincia por ID
+- `POST /provincias` - Crear una nueva provincia
+- `PUT /provincias/:id` - Actualizar una provincia existente
+- `DELETE /provincias/:id` - Eliminar una provincia
+
+### Paquetes
+
+- `GET /paquetes` - Obtener todos los paquetes
+- `GET /paquete-by-id/:id` - Obtener un paquete por ID
+- `POST /paquetes` - Crear un nuevo paquete
+- `PUT /paquetes/:id` - Actualizar un paquete existente
+- `DELETE /paquetes/:id` - Eliminar un paquete
+
+### Relaciones CamioneroXCamion
+
+- `GET /camionerosXCamiones` - Obtener todas las relaciones
+- `GET /CamioneroXCamion-by-id/:id` - Obtener una relación por ID
+- `POST /camioneroXCamion` - Crear una nueva relación
+- `PUT /camioneroXCamion/:id` - Actualizar una relación existente
+- `DELETE /camioneroXCamion/:id` - Eliminar una relación
 
 ## Requisitos del sistema
 
